@@ -23,3 +23,26 @@ exports.getAlunoById = (req, res) => {
   }
   res.status(200).json(aluno);
 };
+
+// Função para deletar um aluno específico por ID
+exports.deleteAluno = (req, res) => {
+  const aluno = alunos.find(a => a.id === parseInt(req.params.id));
+  if (!aluno) {
+      return res.status(404).json({ message: 'Aluno não encontrado!' });
+  }
+  alunos = alunos.filter(a => a.id !== parseInt(req.params.id));
+  res.status(200).json({ message: 'Aluno deletado com sucesso!' });
+}
+
+// Função para atualizar um aluno específico por ID
+exports.updateAluno = (req, res) => {
+  const aluno = alunos.find(a => a.id === parseInt(req.params.id));
+  if (!aluno) {
+      return res.status(404).json({ message: 'Aluno não encontrado!' });
+  }
+  const { nome, email, nome_curso } = req.body;
+  aluno.nome = nome;
+  aluno.email = email;
+  aluno.nome_curso = nome_curso;
+  res.status(200).json({ message: 'Aluno atualizado com sucesso!', aluno });
+};

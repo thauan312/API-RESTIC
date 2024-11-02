@@ -11,4 +11,10 @@ router.get('/', alunoController.getAlunos);
 // Rota para buscar um aluno específico pelo ID
 router.get('/:id', alunoController.getAlunoById);
 
+// Rota para deletar um aluno específico pelo ID
+router.delete('/:id', alunoController.deleteAluno);
+
+// Rota para atualizar um aluno específico pelo ID
+router.put('/:id', alunoController.updateAluno);
+
 module.exports = router;
