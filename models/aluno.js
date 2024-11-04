@@ -1,6 +1,8 @@
+import {v4 as uuidv4} from "uuid"
+
 class Aluno {
-  constructor(id, nome, email, nome_curso) {
-      this.id = id;
+  constructor(nome, email, nome_curso) {
+      this.id = uuidv4();
       this.nome = nome;
       this.email = email;
       this.nome_curso = nome_curso;

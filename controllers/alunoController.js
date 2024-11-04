@@ -4,8 +4,8 @@ let alunos = [];
 
 // Função para criar um novo aluno
 exports.createAluno = (req, res) => {
-    const { id, nome, email, nome_curso } = req.body;
-    const novoAluno = new Aluno(id, nome, email, nome_curso);
+    const { nome, email, nome_curso } = req.body;
+    const novoAluno = new Aluno(nome, email, nome_curso);
     alunos.push(novoAluno);
     res.status(201).json({ message: 'Aluno criado com sucesso!', aluno: novoAluno });
 };
@@ -18,6 +18,15 @@ exports.getAlunos = (req, res) => {
 // Função para buscar um aluno específico por ID
 exports.getAlunoById = (req, res) => {
   const aluno = alunos.find(a => a.id === parseInt(req.params.id));
+  if (!aluno) {
+      return res.status(404).json({ message: 'Aluno não encontrado!' });
+  }
+  res.status(200).json(aluno);
+};
+
+// Função para buscar um aluno específico por ID
+exports.getAlunoByName = (req, res) => {
+  const aluno = alunos.find(a => a.name === parseInt(req.params.name));
   if (!aluno) {
       return res.status(404).json({ message: 'Aluno não encontrado!' });
   }
